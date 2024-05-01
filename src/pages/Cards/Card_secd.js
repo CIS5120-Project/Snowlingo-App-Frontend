@@ -4,6 +4,8 @@ import snow from '../../snowlingo.svg';
 import card_g from './card_g.svg';
 import ski_icon from './pics/board_icon.svg';
 import jump_1 from './pics/jump_1.svg';
+import jump_2 from './pics/jump_2.svg';
+import jump_3 from './pics/jump_3.svg';
 import balance from './pics/balance.svg';
 import lesson from './pics/lesson.svg';
 import map from './pics/map.svg';
@@ -14,6 +16,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import Looks4Icon from '@mui/icons-material/Looks4';
 import CheckIcon from '@mui/icons-material/Check';
+import LockTwoToneIcon from '@mui/icons-material/LockTwoTone';
 // import { Swiper, SwiperSlide } from 'swiper/react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { EffectCoverflow, Pagination, Navigation, Scrollbar } from 'swiper/modules';
@@ -31,6 +34,9 @@ const Card1 = () => {
     const navigate = useNavigate();
     const swiperRef = useRef(null);
     const [quized, setQuized] = useState(false);
+    const imageList = [jump_1, jump_2, jump_3];
+    const [currentImageIndex, setCurrentImageIndex] = useState(0);
+    const [showMessage, setShowMessage] = useState(false);
 
     const handleClick = () => {
         console.log('The image was clicked!');
@@ -44,6 +50,18 @@ const Card1 = () => {
         if (swiperRef.current) {
           swiperRef.current.swiper.slideTo(index);
         }
+      };
+
+    const handleJumpClick = () => {
+        // Update the current image index to the next one in the array, cycling back to the first after the last
+        setCurrentImageIndex(prevIndex => (prevIndex + 1) % imageList.length);
+    };
+
+    const handleRotateClick = () => {
+        setShowMessage(true);
+        setTimeout(() => {
+          setShowMessage(false);
+        }, 3000);
       };
 
     return (
@@ -104,12 +122,12 @@ const Card1 = () => {
                         <img id="lesson_1" src={lesson} alt="logo"  onClick={handleClick}
                             style={{
                                 position: 'absolute',
-                                top: '40%', // Adjust this value to position `jump_1` as needed
-                                left: '100%', // Adjust this value to position `jump_1` as needed
-                                transform: 'translate(-50%, -50%)', // This centers the image on the container
-                                width: '90%', // Adjust this value to set the size of the `jump_1`
+                                top: '40%', 
+                                left: '100%', 
+                                transform: 'translate(-50%, -50%)', 
+                                width: '90%', 
                                 height: 'auto',
-                                zIndex: 2, // Ensure `jump_1` is above `card_backg`
+                                zIndex: 2,
                                 cursor: 'pointer',
                             }}
                         />
@@ -148,10 +166,9 @@ const Card1 = () => {
                     </div>
                 </SwiperSlide>
                 <SwiperSlide id="jump_card">
-                    {/* Content of your first slide */}
                     <div style={{ position: 'relative' }}>
                         <img id="card_backg" src={card_g} alt="logo" />
-                        <img id="jump_1" src={jump_1} alt="logo"
+                        <img id="jump_1" src={imageList[currentImageIndex]} alt="action image"
                             style={{
                                 position: 'absolute',
                                 top: '35%', // Adjust this value to position `jump_1` as needed
@@ -162,7 +179,7 @@ const Card1 = () => {
                                 zIndex: 2, // Ensure `jump_1` is above `card_backg`
                             }}
                         />
-                        <Button color="primary" variant="contained" style={{ position: 'relative', bottom: '150px', left: '105px' }}>
+                        <Button color="primary" variant="contained" onClick={handleJumpClick} style={{ position: 'relative', bottom: '150px', left: '105px' }}>
                         JUMP
                         </Button>
                         <p
@@ -210,7 +227,7 @@ const Card1 = () => {
                                 zIndex: 2,
                             }}
                         />
-                        <Button color="primary" variant="contained" style={{ position: 'relative', bottom: '150px', left: '105px' }}>
+                        <Button color="primary" variant="contained" onClick={handleRotateClick} style={{ position: 'relative', bottom: '150px', left: '105px' }}>
                         ROTATE
                         </Button>
                         <p
@@ -239,6 +256,22 @@ const Card1 = () => {
                           }}
                         >Balance</p>
                     </div>
+                    {showMessage && (
+                            <div style={{
+                            position: 'absolute',
+                            width: 300,
+                            color: 'orange',
+                            bottom: '0px', // Position the message slightly below the button
+                            left: '60%',
+                            transform: 'translateX(-50%)',
+                            // backgroundColor: 'white',
+                            // padding: '10px',
+                            borderRadius: '5px',
+                            boxShadow: '0 2px 10px rgba(0,0,0,0.1)'
+                            }}>
+                            Ready to Calibrate your phone
+                            </div>
+                        )}
                 </SwiperSlide>
                 <SwiperSlide id="quiz_card">
                     <div style={{ position: 'relative' }}>
@@ -403,6 +436,63 @@ const Card1 = () => {
                             zIndex: 3, // Make sure the text is above the image layers
                           }}
                         >More Resorts</p>
+                    </div>
+                </SwiperSlide>
+                <SwiperSlide id="lock_func">
+                    <div style={{ position: 'relative'}}>
+                        <img id="card_backg" src={card_g} alt="logo" />
+                        <div 
+                        style={{
+                            position: 'absolute',
+                            top: 10,
+                            left: 10,
+                            width: '180%',
+                            height: '95%',
+                            backgroundColor: 'rgba(128, 128, 128, 0.5)', // Grey color with 50% opacity
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            zIndex: 2  // Ensures the overlay is above the image
+                          }}
+                        />
+                        <div
+                        style={{
+                            position: 'absolute',
+                            top: '160px',
+                            left: '100px',
+                            // backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                        }}
+                        >
+                            <LockTwoToneIcon 
+                                style={{ width: '80px', height: '80px', fill: 'white' }}
+                            />
+                        </div>
+                        <p
+                        style={{
+                            position: 'absolute',
+                            top: '20%', // Adjust as needed to move the text up or down
+                            left: '110%', // Center horizontally
+                            transform: 'translate(-50%, -50%)',
+                            width: '170px',
+                            color: 'white',
+                            fontWeight: 'bold',
+                            fontSize: '24px',
+                            zIndex: 3, // Make sure the text is above the image layers
+                          }}
+                        >More Comming..</p>
+                         <p
+                        style={{
+                            position: 'absolute',
+                            top: '58%', // Adjust as needed to move the text up or down
+                            left: '140%', // Center horizontally
+                            transform: 'translate(-50%, -50%)',
+                            width: '170px',
+                            color: 'white',
+                            fontWeight: 'bold',
+                            fontSize: '16px',
+                            zIndex: 3, // Make sure the text is above the image layers
+                          }}
+                        >Locked</p>
                     </div>
                 </SwiperSlide>
                 {/* More SwiperSlides */}

@@ -43,7 +43,7 @@ function Home (){
           fontSize: '1.25rem',
           color: theme.palette.primary.main
         }}
-        onClick = {() => navigate("/lesson")}
+        onClick = {() => navigate("/cards02")}
       >
           Start Learning
         <CreateIcon />

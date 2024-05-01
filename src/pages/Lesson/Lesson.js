@@ -57,10 +57,10 @@ function Lesson() {
             >
               <Box component="span" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', color: theme.palette.primary.light, fontSize: '16px' }}>
                 <Typography variant="body1" color={theme.palette.primary.dark} >
-                  Section 1
+                  BEGINNER LEVEL
                 </Typography>
                 <Typography variant="body2" color={theme.palette.primary.dark} >
-                  Introduction
+                  {/* Introduction */}
                 </Typography>
               </Box>
             </Button>
@@ -79,7 +79,7 @@ function Lesson() {
             >
               <Box component="span" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', color: theme.palette.primary.light, fontSize: '16px' }}>
                 <Typography variant="body1" color={theme.palette.primary.dark} >
-                  Section 2
+                  INTERMEDIATE LEVEL
                 </Typography>
                 <Typography
                   variant="body2"
@@ -88,7 +88,7 @@ function Lesson() {
                     maxWidth: '200px', // Sets the maximum width of the text
                   }}
                 >
-                  Save a beginner snowboarder from quitting
+                  {/* Save a beginner snowboarder from quitting */}
                 </Typography>
               </Box>
             </Button>
@@ -107,7 +107,7 @@ function Lesson() {
             >
               <Box component="span" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', color: theme.palette.primary.light, fontSize: '16px' }}>
                 <Typography variant="body1" color={theme.palette.primary.dark} >
-                  Section 3
+                 ADVANCED LEVEL
                 </Typography>
                 <Typography
                   variant="body2"
@@ -116,7 +116,7 @@ function Lesson() {
                     maxWidth: '200px', // Sets the maximum width of the text
                   }}
                 >
-                  Improve Beginner Snowboard Turns with One Skill
+                  {/* Improve Beginner Snowboard Turns with One Skill */}
                 </Typography>
               </Box>
             </Button>
