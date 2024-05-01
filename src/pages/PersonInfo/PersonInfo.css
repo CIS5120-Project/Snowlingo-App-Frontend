@@ -1,0 +1,16 @@
+.personInfoContainer h1, h2, button {
+    color: #F0F3FF;
+}
+
+.personInfoContainer button {
+    height: 73px;
+    width: 352px;
+    border-color: #15F5BA;
+    background-color: #211951;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+

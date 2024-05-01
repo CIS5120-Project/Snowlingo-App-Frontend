@@ -1,0 +1,54 @@
+.landing .logo{
+    width: 200px;
+    text-align: left;
+    margin: 25% 0 0 1rem;
+}
+
+.landing .logo img{
+  width: 300px;
+}
+
+.landing .advanture{
+    font-size: 20px;
+    font-weight: normal;
+    margin-top: -0.5rem;
+    margin-left: 1.5rem;
+    color: white;
+}
+
+.landing .login{
+    font-size: 45px;
+    font-weight: bolder;
+    text-decoration: underline;
+    color: #15F5BA;
+    margin-bottom: 0%;
+    margin-top: 30%;
+    margin-left: 1rem;
+    background-color: inherit;
+}
+
+.landing .account-sign{
+    display: flex;
+    font-size: small;
+    margin-top: 0%;
+    color: white;
+    margin-left: 1.5rem;
+}
+
+.landing .signup{
+    color: #FE76FF;
+    text-decoration: underline;
+    margin-left: 2%;
+    margin-top: 0%;
+}
+
+.landing .contact{
+    margin-top: 0;
+    color: white;
+}
+
+.background-mountain {
+  flex: 1;
+  background-size: cover;
+	background-image: url('./landingBg.svg');
+}
