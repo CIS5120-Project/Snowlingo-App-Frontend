@@ -16,6 +16,8 @@ import Home from "./pages/Home/Home";
 import Lesson from "./pages/Lesson/Lesson";
 import Unit from "./pages/Unit/Unit";
 import Maintenance from './pages/Maintenance/Maintenance';
+import Card from './pages/Cards/Card_init';
+import Card02 from './pages/Cards/Card_secd';
 
 function App() {
   return (
@@ -30,12 +32,14 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/home" element={<Home />} />
             <Route path="/lesson" element={<Lesson />} />
-            <Route path="/skiinfo" element={<SkiInfo />} />
-            <Route path="/skiinfo2" element={<SkiInfo2 />} />
+            <Route path="/skiinfo" element={<SkiInfo2 />} />
+            <Route path="/skiinfo2" element={<SkiInfo />} />
             <Route path="/personinfo" element={<PersonInfo />} />
             <Route path="/unit" element={<Unit />} />
             <Route path="/maintenance" element={<Maintenance />} />
             <Route path="/" element={<Landing />} />
+            <Route path="/card" element={<Card />} />
+            <Route path="/cards02" element={<Card02 />} />
           </Routes>
         </div>
       </Router>

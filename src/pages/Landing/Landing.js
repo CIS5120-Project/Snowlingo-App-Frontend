@@ -10,8 +10,8 @@ function Landing (){
   const goToLogin =() => {
     navigate('/Login');
   }
-  const goToPersoninfo =() => {
-    navigate('/personinfo');
+  const goToSkiinfo =() => {
+    navigate('/skiinfo');
   }
 
   return (
@@ -26,7 +26,7 @@ function Landing (){
         <IconButton className='login' onClick={goToLogin}>Login {'>>>'}</IconButton>
         <div className='account-sign'>
             <p style={{marginTop:'0px'}}>Don't have account?  </p>
-            <p className='signup' onClick={goToPersoninfo}> SignUp here</p>
+            <p className='signup' onClick={goToSkiinfo}> SignUp here</p>
         </div>
       </div>
 

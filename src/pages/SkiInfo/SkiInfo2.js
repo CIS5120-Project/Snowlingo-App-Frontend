@@ -3,7 +3,7 @@ import "./SkiInfo.css";
 import logo from "../../snowlingo.svg"
 
 import { useNavigate } from 'react-router-dom';
-import { Box, Stack, TextField, Typography, Grid, MenuItem, Select, FormControl, InputLabel, useTheme, Hidden } from '@mui/material';
+import { Box, Stack, Button, TextField, Typography, Grid, MenuItem, Select, FormControl, InputLabel, useTheme, Hidden } from '@mui/material';
 
 function SkiInfo2 () {
   const theme = useTheme();
@@ -293,24 +293,33 @@ function SkiInfo2 () {
         sx={{
           marginTop: "10%",
           display: 'flex',
-          justifyContent: "space-between"
+          justifyContent: "center"
         }}
       >
-        <Typography
-          variant="h1"
-          sx={{
-            color: "#FE76FF",
-            fontSize: "4rem",
-            marginTop: "20%",
-            cursor: "pointer",
-            "&:hover": {
-              textDecoration: "underline"
-            }
+        <Button
+          variant="outlined"
+          style={{
+            backgroundColor: theme.palette.secondary.main
           }}
-          onClick={handleSubmit}
+          sx={{
+            height: '5vh',
+            width: '40vw',
+            marginTop: '25%',
+            borderRadius: '15px',
+          }}
+          onClick = {() => navigate("/home")}
         >
-          Submit {'>>>'}
-        </Typography>
+          <Typography
+            variant="body3"
+            fontSize={"1rem"}
+            gutterBottom
+            sx={{
+              color: "black"
+            }}
+          >
+            Submit
+          </Typography>
+        </Button>
       </Box>
     </Box>
   );
