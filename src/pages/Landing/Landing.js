@@ -11,7 +11,7 @@ function Landing (){
     navigate('/Login');
   }
   const goToSkiinfo =() => {
-    navigate('/skiinfo');
+    navigate('/skiinfo2');
   }
 
   return (
