@@ -13,6 +13,7 @@ function PersonInfo () {
   const [deleteCount, setDeleteCount] = useState(0);
   const [lastMousePosition, setLastMousePosition] = useState({ x: 0, y: 0 });
   const [totalDistance, setTotalDistance] = useState(0);
+  const [ageNum, setAgeNum] = useState('');
   const [height, setHeight] = useState('');
   const [heightUnit, setHeightUnit] = useState('ft');
   const [weightUnit, setWeightUnit] = useState('lbs');
@@ -34,6 +35,21 @@ function PersonInfo () {
           setHeight("5'8''"); // Set a default example value for feet and inches
       }
   };
+
+  const handleAgeChange = (event) => {
+    let age = parseInt(event.target.value, 10);
+    if (!isNaN(age)) {
+      if (age > 120) {
+        age = 120;
+      }
+      if (age < 0) {
+        age = 0;
+      }
+      setAgeNum(age);
+    } else {
+      setAgeNum('');
+    }
+  }
 
   const handleHeightChange = (event) => {
       const newHeight = event.target.value;
@@ -159,6 +175,10 @@ function PersonInfo () {
               variant="standard"
               type="number"
               label="Age:"
+              value={ageNum}
+              inputProps={{
+                max: 120, min: 0
+              }}
               InputLabelProps={{ style: { color: "#F0F3FF" }, shrink: false }}
               sx={{
                 backgroundColor: theme.palette.primary.dark,
@@ -166,6 +186,7 @@ function PersonInfo () {
                 width: "100%",
                 input: { color: theme.palette.secondary.main, textAlign: "right" }
               }}
+              onChange={handleAgeChange}
             />
           </Grid>
         </Grid>
