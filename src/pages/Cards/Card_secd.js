@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+// import { createContext, useContext } from 'react';
 import './Card_init.css'
 import snow from '../../snowlingo.svg';
 import card_g from './card_g.svg';
@@ -44,6 +45,15 @@ const Card1 = () => {
     const API_Key = "uK5KQiG3kRSRj6CGY8wr1MLniUGG4IuL";
     const [state, setState] = useState('');
     const [city, setCity] = useState('');
+    const [lastUnlockedSlideIndex, setLastUnlockedSlideIndex] = useState(0);
+    const totalSlides = 8  //dynamic
+
+    //click to unlock
+    const handleSlideClick = (index) => {
+        if (index === lastUnlockedSlideIndex && index < totalSlides - 1) {
+            setLastUnlockedSlideIndex(index + 1);
+        }
+    };
 
     const handleClick = () => {
         console.log('The image was clicked!');
@@ -148,39 +158,43 @@ const Card1 = () => {
             </Box>
 
             <img id="ski-icon" src={ski_icon} alt="logo" style={{ marginTop: "0.2rem", marginBottom: "0.5rem", marginLeft:"10.5rem" }}></img>
+
+
             <Swiper
-            ref={swiperRef}
-            effect={'coverflow'}
-            grabCursor={true}
-            centeredSlides={true}
-            slidesPerView={3}
-            coverflowEffect={{
-                "rotate": 50,
-                "stretch": 0,
-                "depth": 100,
-                "modifier": 1,
-                "slideShadows": true,
-            }}
-            pagination={{clickable:true,
-                        // type: 'fraction',
-                        // marginTop:'50px',
-                        // bottom: '10px',
-                        // el: '.swiper-pagination',
-                        }}
-            Navigation={true}
-            scrollbar={{ draggable: true }}
-            modules={[EffectCoverflow, Pagination, Navigation, Scrollbar]}
-            className="my-swiper"
-            style={{
-                // width: '100%', // Ensure Swiper takes up the full width
-                // maxWidth: '600px', // Maximum width of the Swiper; adjust as needed
-                // marginLeft: '0px', // Combined with marginRight: 'auto', this centers the Swiper
-                // marginRight: 'auto',
-                marginTop: '10px',
-              }}
+                ref={swiperRef}
+                effect={'coverflow'}
+                grabCursor={true}
+                centeredSlides={true}
+                slidesPerView={3}
+                coverflowEffect={{
+                    "rotate": 50,
+                    "stretch": 0,
+                    "depth": 100,
+                    "modifier": 1,
+                    "slideShadows": true,
+                }}
+                pagination={{clickable:true,
+                            // type: 'fraction',
+                            // marginTop:'50px',
+                            // bottom: '10px',
+                            // el: '.swiper-pagination',
+                            }}
+                Navigation={true}
+                scrollbar={{ draggable: true }}
+                modules={[EffectCoverflow, Pagination, Navigation, Scrollbar]}
+                className="my-swiper"
+                style={{
+                    // width: '100%', // Ensure Swiper takes up the full width
+                    // maxWidth: '600px', // Maximum width of the Swiper; adjust as needed
+                    // marginLeft: '0px', // Combined with marginRight: 'auto', this centers the Swiper
+                    // marginRight: 'auto',
+                    marginTop: '10px',
+                }}
             >
-                 <SwiperSlide id="lesson_card">
+
+                 <SwiperSlide id="lesson_card" onClick={() => handleSlideClick(0)}>
                     {/* Content of your first slide */}
+                    {0 <= lastUnlockedSlideIndex ? (
                     <div style={{ position: 'relative' }}>
                         <img id="card_backg" src={card_g} alt="logo" />
                         <img id="lesson_1" src={lesson} alt="logo"  onClick={handleClick}
@@ -228,8 +242,16 @@ const Card1 = () => {
                         </Button>
                         <Looks4Icon style={{ position: 'relative', top: '-370px', left:'150px' }}></Looks4Icon>
                     </div>
+                    ) : (
+                        <div style={{ opacity: 0.5, backgroundColor: 'grey', justifyContent: 'center', display: 'flex', alignItems: 'center', height: '100%' }}>
+                            <LockTwoToneIcon style={{ fontSize: '50px', color: 'white' }} />
+                        </div>
+                    )}
                 </SwiperSlide>
-                <SwiperSlide id="jump_card">
+
+
+                <SwiperSlide id="jump_card" onClick={() => handleSlideClick(1)}>
+                    {1 <= lastUnlockedSlideIndex ? (
                     <div style={{ position: 'relative' }}>
                         <img id="card_backg" src={card_g} alt="logo" />
                         <img id="jump_1" src={imageList[currentImageIndex]} alt="action image"
@@ -272,9 +294,17 @@ const Card1 = () => {
                           }}
                         >Focus</p>
                     </div>
+                     ) : (
+                        <div style={{ opacity: 0.8, justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+                            <img id="card_backg" src={card_g} alt="logo" />
+                            <LockTwoToneIcon style={{position: 'absolute', fontSize: '80px', color: 'white',top: '35%',left:'70%', zIndex: 2 }} />
+                        </div>
+                    )}
                 </SwiperSlide>
-                <SwiperSlide id="lesson_card02">
-                    {/* Content of your first slide */}
+
+
+                <SwiperSlide id="lesson_card02" onClick={() => handleSlideClick(2)}>
+                    {2 <= lastUnlockedSlideIndex ? (
                     <div style={{ position: 'relative' }}>
                         <img id="card_backg" src={card_g} alt="logo" />
                         <img id="lesson_1" src={lesson} alt="logo"  onClick={handleClick}
@@ -322,8 +352,18 @@ const Card1 = () => {
                         </Button>
                         <Looks4Icon style={{ position: 'relative', top: '-370px', left:'150px' }}></Looks4Icon>
                     </div>
+                     ) : (
+                        <div style={{ opacity: 0.8, justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+                            <img id="card_backg" src={card_g} alt="logo" />
+                            <LockTwoToneIcon style={{position: 'absolute', fontSize: '80px', color: 'white',top: '35%',left:'70%', zIndex: 2 }} />
+                        </div>
+                    )}
                 </SwiperSlide>
-                <SwiperSlide id="rotate_card">
+
+
+
+                <SwiperSlide id="rotate_card" onClick={() => handleSlideClick(3)}>
+                    {3 <= lastUnlockedSlideIndex ? (
                     <div style={{ position: 'relative' }}>
                         <img id="card_backg" src={card_g} alt="logo" />
                         <img id="balance" src={balance} alt="logo"
@@ -369,8 +409,7 @@ const Card1 = () => {
                             zIndex: 3, // Make sure the text is above the image layers
                           }}
                         >Balance</p>
-                    </div>
-                    {showMessage && (
+                        {showMessage && (
                             <div style={{
                             position: 'absolute',
                             width: 300,
@@ -386,8 +425,18 @@ const Card1 = () => {
                             Ready to Calibrate your phone
                             </div>
                         )}
+                    </div>
+                        ) : (
+                            <div style={{ opacity: 0.8, justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+                                <img id="card_backg" src={card_g} alt="logo" />
+                                <LockTwoToneIcon style={{position: 'absolute', fontSize: '80px', color: 'white',top: '35%',left:'70%', zIndex: 2 }} />
+                            </div>
+                        )}
                 </SwiperSlide>
-                <SwiperSlide id="quiz_card">
+
+
+                <SwiperSlide id="quiz_card" onClick={() => handleSlideClick(4)}>
+                    {4 <= lastUnlockedSlideIndex ? (
                     <div style={{ position: 'relative' }}>
                         <img id="card_backg" src={card_g} alt="logo" />
                         <Button color="primary" variant="contained" onClick={handleQuized}
@@ -428,8 +477,16 @@ const Card1 = () => {
                           }}
                         >Quiz</p>
                     </div>
+                    ) : (
+                        <div style={{ opacity: 0.8, justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+                            <img id="card_backg" src={card_g} alt="logo" />
+                            <LockTwoToneIcon style={{position: 'absolute', fontSize: '80px', color: 'white',top: '35%',left:'70%', zIndex: 2 }} />
+                        </div>
+                    )}
                 </SwiperSlide>
-                <SwiperSlide id="resort_card">
+
+                <SwiperSlide id="resort_card" onClick={() => handleSlideClick(5)}>
+                    {5 <= lastUnlockedSlideIndex ? (
                     <div style={{ position: 'relative' }}>
                         <img id="card_backg" src={card_g} alt="logo" />
                         <Button color="primary" variant="contained" style={{ backgroundColor: 'white', color: 'black', position: 'relative', bottom: '305px', left: '40px', width: '200px', height: '30px' }}>
@@ -478,8 +535,16 @@ const Card1 = () => {
                             {buttonText}
                         </Button>
                     </div>
+                    ) : (
+                        <div style={{ opacity: 0.8, justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+                            <img id="card_backg" src={card_g} alt="logo" />
+                            <LockTwoToneIcon style={{position: 'absolute', fontSize: '80px', color: 'white',top: '35%',left:'70%', zIndex: 2 }} />
+                        </div>
+                    )}
                 </SwiperSlide>
-                <SwiperSlide id="more_resort_cards">
+
+                <SwiperSlide id="more_resort_cards" onClick={() => handleSlideClick(6)}>
+                    {6 <= lastUnlockedSlideIndex ? (
                     <div style={{ position: 'relative' }}>
                         <img id="card_backg" src={card_g} alt="logo" />
                         <Button color="primary" variant="contained" style={{ fontSize: '10px', backgroundColor: 'white', color: 'black', position: 'relative', bottom: '280px', left: '50px', width: '180px', height: '30px' }}>
@@ -511,8 +576,16 @@ const Card1 = () => {
                           }}
                         >More Resorts</p>
                     </div>
+                    ) : (
+                        <div style={{ opacity: 0.8, justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+                            <img id="card_backg" src={card_g} alt="logo" />
+                            <LockTwoToneIcon style={{position: 'absolute', fontSize: '80px', color: 'white',top: '35%',left:'70%', zIndex: 2 }} />
+                        </div>
+                    )}
                 </SwiperSlide>
-                <SwiperSlide id="lock_func">
+
+                <SwiperSlide id="lock_func" onClick={() => handleSlideClick(7)}>
+                    {7 <= lastUnlockedSlideIndex ? (
                     <div style={{ position: 'relative'}}>
                         <img id="card_backg" src={card_g} alt="logo" />
                         <div 
@@ -568,6 +641,12 @@ const Card1 = () => {
                           }}
                         >Locked</p>
                     </div>
+                    ) : (
+                        <div style={{ opacity: 0.8, justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+                            <img id="card_backg" src={card_g} alt="logo" />
+                            <LockTwoToneIcon style={{position: 'absolute', fontSize: '80px', color: 'white',top: '35%',left:'70%', zIndex: 2 }} />
+                        </div>
+                    )}
                 </SwiperSlide>
                 {/* More SwiperSlides */}
             </Swiper>
