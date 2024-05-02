@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import './Card_init.css'
 import snow from '../../snowlingo.svg';
 import card_g from './card_g.svg';
@@ -30,6 +30,8 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import 'swiper/css/scrollbar';
 
+
+
 const Card1 = () => {
     const navigate = useNavigate();
     const swiperRef = useRef(null);
@@ -37,6 +39,11 @@ const Card1 = () => {
     const imageList = [jump_1, jump_2, jump_3];
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [showMessage, setShowMessage] = useState(false);
+
+    const [buttonText, setButtonText] = useState('Current location');
+    const API_Key = "uK5KQiG3kRSRj6CGY8wr1MLniUGG4IuL";
+    const [state, setState] = useState('');
+    const [city, setCity] = useState('');
 
     const handleClick = () => {
         console.log('The image was clicked!');
@@ -51,11 +58,12 @@ const Card1 = () => {
           swiperRef.current.swiper.slideTo(index);
         }
       };
+    
       
     function handleUnitClick(event) {
     const buttonId = event.currentTarget.getAttribute('data-id');
     navigate(`/unit?id=${buttonId}`);
-    }
+    };
 
     const handleJumpClick = () => {
         // Update the current image index to the next one in the array, cycling back to the first after the last
@@ -68,6 +76,57 @@ const Card1 = () => {
           setShowMessage(false);
         }, 3000);
       };
+
+    const handleSuccess = async (position) => {
+        console.log('Latitude:', position.coords.latitude);
+        console.log('Longitude:', position.coords.longitude);
+        fetch(`https://api.tomtom.com/search/2/nearbySearch/.json?key=${API_Key}&lat=${position.coords.latitude}&lon=${position.coords.longitude}`)
+          .then((res) => res.json())
+          .then((data) => {
+            const addressObj = data.results[0].address;
+            const stateCode = addressObj.countrySubdivisionCode;
+            const cityName = addressObj.municipality
+            setState(stateCode);
+            setCity(cityName);
+          });
+    };
+
+    // Function to handle location access error
+    const handleError = (error) => {
+        console.error('Error accessing location:', error.message);
+    };
+
+    useEffect(() => {
+        if ('geolocation' in navigator) {
+            navigator.geolocation.getCurrentPosition(handleSuccess, handleError, {
+                // maximumAge: 60000, // Acceptable cache age of a position
+                // timeout: 5000,    // Timeout for the request
+                enableHighAccuracy: true // Request high accuracy position
+            });
+        } else {
+            console.error('Geolocation is not supported by your browser');
+        }
+        // setStartTime(Date.now());
+        // setHeight("5'8''"); // Set a default example value for feet and inches
+        }, 
+        []);
+
+    const showLocation = () => {
+        // setButtonText(city, state || "No location access")
+        if (city && state) {
+            setButtonText(`${city}, ${state}`); // Both city and state are set
+          } else {
+            setButtonText("Location not set"); // Default text if one or both are not set
+          }
+    };
+
+    
+
+
+
+
+
+
 
     return (
         <Box
@@ -154,8 +213,8 @@ const Card1 = () => {
                         <p
                         style={{
                             position: 'absolute',
-                            top: '15%', // Adjust as needed to move the text up or down
-                            left: '124%', // Center horizontally
+                            top: '12%', // Adjust as needed to move the text up or down
+                            left: '130%', // Center horizontally
                             transform: 'translate(-50%, -50%)',
                             width: '170px',
                             color: 'white',
@@ -163,7 +222,7 @@ const Card1 = () => {
                             fontSize: '28px',
                             zIndex: 3, // Make sure the text is above the image layers
                           }}
-                        >Lessons</p>
+                        >Unit 1</p>
                         <Button color="primary" variant="contained" onClick={handleUnitClick} style={{ position: 'relative', bottom: '150px', left: '105px' }}>
                         START
                         </Button>
@@ -212,6 +271,56 @@ const Card1 = () => {
                             zIndex: 3, // Make sure the text is above the image layers
                           }}
                         >Focus</p>
+                    </div>
+                </SwiperSlide>
+                <SwiperSlide id="lesson_card02">
+                    {/* Content of your first slide */}
+                    <div style={{ position: 'relative' }}>
+                        <img id="card_backg" src={card_g} alt="logo" />
+                        <img id="lesson_1" src={lesson} alt="logo"  onClick={handleClick}
+                            style={{
+                                position: 'absolute',
+                                top: '40%', 
+                                left: '100%', 
+                                transform: 'translate(-50%, -50%)', 
+                                width: '90%', 
+                                height: 'auto',
+                                zIndex: 2,
+                                cursor: 'pointer',
+                            }}
+                        />
+                        <p
+                        style={{
+                            position: 'absolute',
+                            top: '70%', // Adjust as needed to move the text up or down
+                            left: '99%', // Center horizontally
+                            transform: 'translate(-50%, -50%)',
+                            width: '170px',
+                            height: 'auto',
+                            color: 'white',
+                            wordSpacing: '-1px',
+                            lineHeight: '1.1',
+                            textAlign: 'center',
+                            zIndex: 3, // Make sure the text is above the image layers
+                          }}
+                        >How To make simple turn on Slope</p>
+                        <p
+                        style={{
+                            position: 'absolute',
+                            top: '12%', // Adjust as needed to move the text up or down
+                            left: '130%', // Center horizontally
+                            transform: 'translate(-50%, -50%)',
+                            width: '170px',
+                            color: 'white',
+                            fontWeight: 'bold',
+                            fontSize: '28px',
+                            zIndex: 3, // Make sure the text is above the image layers
+                          }}
+                        >Unit 2</p>
+                        <Button color="primary" variant="contained" onClick={handleUnitClick} style={{ position: 'relative', bottom: '150px', left: '105px' }}>
+                        START
+                        </Button>
+                        <Looks4Icon style={{ position: 'relative', top: '-370px', left:'150px' }}></Looks4Icon>
                     </div>
                 </SwiperSlide>
                 <SwiperSlide id="rotate_card">
@@ -301,7 +410,8 @@ const Card1 = () => {
                             width: '170px',
                             height: 'auto',
                             color: 'white',
-                            zIndex: 3, // Make sure the text is above the image layers
+                            zIndex: 3,
+                            fontWeight: 'bold'
                           }}
                         >When you hurt what should do?</p>
                         <p
@@ -333,16 +443,12 @@ const Card1 = () => {
                             fontWeight:'bold'
                         }}
                         >BlueMountain Resort (5.1mi)</p>
-                            <Button onClick={()=>goToSlide(6)} style={{ backgroundColor: '#FE76FF', color: 'black', left: '7px', width:'50px', height:'20px', fontSize:'12px' }}>
+                            <Button onClick={()=>goToSlide(2)} style={{ backgroundColor: '#FE76FF', color: 'black', left: '7px', width:'50px', height:'20px', fontSize:'12px' }}>
                             More
                             </Button>
                         </Button>
                         <img id="map" src={map} alt="logo"
                             style={{
-                            // Set a specific size or use max values to constrain the size
-                            // maxWidth: '350px', // Adjust this value as needed
-                            // maxHeight: '350px', // Adjust this value as needed
-                            // marginLeft: '5.5rem',
                                 position: 'absolute',
                                 top: '38%',
                                 left: '97%',
@@ -352,7 +458,7 @@ const Card1 = () => {
                                 zIndex: 2,
                             }}
                         />
-                        <Button color="primary" variant="contained" style={{ backgroundColor: 'white', color: 'black', position: 'relative', bottom: '185px', left: '40px', width: '200px', height: '50px',  fontSize: '12px', fontWeight: 'bold' }}>
+                        <Button color="primary" variant="contained" style={{ backgroundColor: 'white', color: 'black', position: 'relative', bottom: '175px', left: '40px', width: '200px', height: '50px',  fontSize: '12px', fontWeight: 'bold' }}>
                         Go make 10 turns in mid level slope!
                         </Button>
                         <p
@@ -368,46 +474,9 @@ const Card1 = () => {
                             zIndex: 3, // Make sure the text is above the image layers
                           }}
                         >Tasks</p>
-                    </div>
-                </SwiperSlide>
-                <SwiperSlide id="search_resort_card">
-                    <div style={{ position: 'relative' }}>
-                        <img id="card_backg" src={card_g} alt="logo" />
-                        <Button color="primary" variant="contained" style={{ backgroundColor: 'white', color: 'black', position: 'relative', bottom: '310px', left: '40px', width: '200px' }}>
-                        <SearchIcon></SearchIcon>
-                        SEARCH
+                        <Button onClick={()=>showLocation()} style={{ backgroundColor: '#FE76FF', color: 'black', fontWeight: 'bold', left: '7px', width:'125px', height:'30px', fontSize:'10px', bottom:'155px', left:"75px" }}>
+                            {buttonText}
                         </Button>
-                        <img id="map" src={map} alt="logo"
-                            style={{
-                            // Set a specific size or use max values to constrain the size
-                            // maxWidth: '350px', // Adjust this value as needed
-                            // maxHeight: '350px', // Adjust this value as needed
-                            // marginLeft: '5.5rem',
-                                position: 'absolute',
-                                top: '38%',
-                                left: '97%',
-                                transform: 'translate(-50%, -50%)',
-                                width: '55vw',
-                                height: 'auto',
-                                zIndex: 2,
-                            }}
-                        />
-                        <Button color="primary" variant="contained" style={{ backgroundColor: 'white', color: 'black', position: 'relative', bottom: '180px', left: '40px', width: '200px', height: '50px' }}>
-                        BlueMountain Resort
-                        </Button>
-                        <p
-                        style={{
-                            position: 'absolute',
-                            top: '8%', // Adjust as needed to move the text up or down
-                            left: '138%', // Center horizontally
-                            transform: 'translate(-50%, -50%)',
-                            width: '170px',
-                            color: 'white',
-                            fontWeight: 'bold',
-                            fontSize: '28px',
-                            zIndex: 3, // Make sure the text is above the image layers
-                          }}
-                        >Finds</p>
                     </div>
                 </SwiperSlide>
                 <SwiperSlide id="more_resort_cards">
