@@ -8,9 +8,13 @@ function Lesson() {
   const navigate = useNavigate();
   const theme = useTheme();
 
-  function handleUnitClick(event) {
+  // function handleUnitClick(event) {
+  //   const buttonId = event.currentTarget.getAttribute('data-id');
+  //   navigate(`/unit?id=${buttonId}`);
+  // }
+  function handleUnitClick02(event) {
     const buttonId = event.currentTarget.getAttribute('data-id');
-    navigate(`/unit?id=${buttonId}`);
+    navigate(`/cards02`);
   }
 
   return (
@@ -53,7 +57,7 @@ function Lesson() {
                   backgroundColor: '#15F5BA',
                 }
               }}
-              onClick = {handleUnitClick}
+              onClick = {handleUnitClick02}
             >
               <Box component="span" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', color: theme.palette.primary.light, fontSize: '16px' }}>
                 <Typography variant="body1" color={theme.palette.primary.dark} >
@@ -75,7 +79,7 @@ function Lesson() {
                   backgroundColor: '#15F5BA',
                 }
               }}
-              onClick = {handleUnitClick}
+              onClick = {handleUnitClick02}
             >
               <Box component="span" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', color: theme.palette.primary.light, fontSize: '16px' }}>
                 <Typography variant="body1" color={theme.palette.primary.dark} >
@@ -103,7 +107,7 @@ function Lesson() {
                   backgroundColor: '#15F5BA',
                 }
               }}
-              onClick = {handleUnitClick}
+              onClick = {handleUnitClick02}
             >
               <Box component="span" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', color: theme.palette.primary.light, fontSize: '16px' }}>
                 <Typography variant="body1" color={theme.palette.primary.dark} >

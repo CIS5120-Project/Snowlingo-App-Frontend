@@ -23,11 +23,11 @@ function Unit() {
             alignSelf: 'self-start',
             color: theme.palette.primary.light,
           }}
-          onClick={() => navigate("/lesson")}
+          onClick={() => navigate("/cards02")}
         />
         <img src={snow} alt="logo" style={{ margin: '0', width: '120px'}}></img>
       </Box>
-      <Grid container spacing={2} style={{ marginTop: '1.5rem'}}>
+      {/* <Grid container spacing={2} style={{ marginTop: '1.5rem'}}>
         <Grid
           item
           xs={4}
@@ -66,6 +66,11 @@ function Unit() {
           }}>
           <Button variant="contained" style={{ minWidth: "80px", backgroundColor: "#999999", color: "#211951" }}>  ... </Button>
         </Grid>
+      </Grid> */}
+      <Grid container style={{marginTop: '30px', padding: '10px'}}>
+        <Typography variant="h6" style={{ color: 'white' }}>
+          Start Learning by video!
+        </Typography>
       </Grid>
       <YoutubeEmbed embedId="q9asUAV9MWg" style={{ marginTop: '2rem'}}/>
       <Box

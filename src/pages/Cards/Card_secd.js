@@ -51,6 +51,11 @@ const Card1 = () => {
           swiperRef.current.swiper.slideTo(index);
         }
       };
+      
+    function handleUnitClick(event) {
+    const buttonId = event.currentTarget.getAttribute('data-id');
+    navigate(`/unit?id=${buttonId}`);
+    }
 
     const handleJumpClick = () => {
         // Update the current image index to the next one in the array, cycling back to the first after the last
@@ -77,7 +82,7 @@ const Card1 = () => {
                 display: 'flex'
               }}
             >
-                <NavLink to="/home" style={{ textDecoration: 'none' }}>
+                <NavLink to="/lesson" style={{ textDecoration: 'none' }}>
                 <ArrowBackIosNewIcon sx={{ marginRight: 1, color: 'white', fontSize:"2.8rem", marginTop: "2rem"}} /> {/* Add some right margin to the icon */}
                 </NavLink>
                 <img id="login-snow" src={snow} alt="logo" style={{ marginTop: "0.5rem", marginBottom: "1.5rem", marginLeft:"5.5rem" }}></img>
@@ -159,7 +164,7 @@ const Card1 = () => {
                             zIndex: 3, // Make sure the text is above the image layers
                           }}
                         >Lessons</p>
-                        <Button color="primary" variant="contained" onClick={() => navigate("/lesson")} style={{ position: 'relative', bottom: '150px', left: '105px' }}>
+                        <Button color="primary" variant="contained" onClick={handleUnitClick} style={{ position: 'relative', bottom: '150px', left: '105px' }}>
                         START
                         </Button>
                         <Looks4Icon style={{ position: 'relative', top: '-370px', left:'150px' }}></Looks4Icon>
