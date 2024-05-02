@@ -13,7 +13,6 @@ import map from './pics/map.svg';
 import { NavLink, useNavigate } from 'react-router-dom';
 // import { Box, Grid, Paper, TextField, Button } from '@mui/material';
 import { Box, Button} from '@mui/material';
-import SearchIcon from '@mui/icons-material/Search';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import Looks4Icon from '@mui/icons-material/Looks4';
 import CheckIcon from '@mui/icons-material/Check';
@@ -45,7 +44,12 @@ const Card1 = () => {
     const API_Key = "uK5KQiG3kRSRj6CGY8wr1MLniUGG4IuL";
     const [state, setState] = useState('');
     const [city, setCity] = useState('');
-    const [lastUnlockedSlideIndex, setLastUnlockedSlideIndex] = useState(0);
+    // const [lastUnlockedSlideIndex, setLastUnlockedSlideIndex] = useState(0);
+    const [lastUnlockedSlideIndex, setLastUnlockedSlideIndex] = useState(() => {
+        const storedIndex = localStorage.getItem('lastUnlockedSlideIndex');
+        console.log("Initial read from localStorage:", storedIndex);
+        return storedIndex !== null ? parseInt(storedIndex, 10) : 0;
+    });
     const totalSlides = 8  //dynamic
 
     //click to unlock
@@ -55,6 +59,21 @@ const Card1 = () => {
         }
     };
 
+    //store slide index
+    useEffect(() => {
+        const storedIndex = localStorage.getItem('lastUnlockedSlideIndex');
+        if (storedIndex !== null) {
+            console.log("Loading lastUnlockedSlideIndex from localStorage:", storedIndex);
+            setLastUnlockedSlideIndex(parseInt(storedIndex, 10));
+        }
+    }, []);
+
+    useEffect(() => {
+        console.log("Updating lastUnlockedSlideIndex in localStorage:", lastUnlockedSlideIndex);
+        localStorage.setItem('lastUnlockedSlideIndex', lastUnlockedSlideIndex);
+    }, [lastUnlockedSlideIndex]);
+
+    //useless click
     const handleClick = () => {
         console.log('The image was clicked!');
       };
@@ -63,13 +82,14 @@ const Card1 = () => {
         setQuized(true);
     };
 
+    // jump to slide
     const goToSlide = (index) => {
         if (swiperRef.current) {
           swiperRef.current.swiper.slideTo(index);
         }
       };
     
-      
+    //unit
     function handleUnitClick(event) {
     const buttonId = event.currentTarget.getAttribute('data-id');
     navigate(`/unit?id=${buttonId}`);
@@ -531,7 +551,7 @@ const Card1 = () => {
                             zIndex: 3, // Make sure the text is above the image layers
                           }}
                         >Tasks</p>
-                        <Button onClick={()=>showLocation()} style={{ backgroundColor: '#FE76FF', color: 'black', fontWeight: 'bold', left: '7px', width:'125px', height:'30px', fontSize:'10px', bottom:'155px', left:"75px" }}>
+                        <Button onClick={()=>showLocation()} style={{ backgroundColor: '#FE76FF', color: 'black', fontWeight: 'bold', width:'125px', height:'30px', fontSize:'10px', bottom:'155px', left:"75px" }}>
                             {buttonText}
                         </Button>
                     </div>
