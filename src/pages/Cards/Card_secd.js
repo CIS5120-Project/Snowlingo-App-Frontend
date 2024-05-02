@@ -31,6 +31,8 @@ const Card1 = () => {
     const navigate = useNavigate();
     const swiperRef = useRef(null);
     const [quized, setQuized] = useState(false);
+    const [bIncorrect, setBIncorrect] = useState(false);
+    const [cIncorrect, setCIncorrect] = useState(false);
 
     const handleClick = () => {
         console.log('The image was clicked!');
@@ -39,6 +41,14 @@ const Card1 = () => {
     const handleQuized = () => {
         setQuized(true);
     };
+
+    const handleBIncorrect = (flag) => {
+        setBIncorrect(flag);
+    }
+
+    const handleCIncorrect = (flag) => {
+        setCIncorrect(flag);
+    }
 
     const goToSlide = (index) => {
         if (swiperRef.current) {
@@ -244,15 +254,17 @@ const Card1 = () => {
                     <div style={{ position: 'relative' }}>
                         <img id="card_backg" src={card_g} alt="logo" />
                         <Button color="primary" variant="contained" onClick={handleQuized}
-                            style={{ backgroundColor: quized?'#FE76FF':'white', color: 'black', position: 'relative', bottom: '300px', left: '50px', width: '180px' }}>
+                            style={{ backgroundColor: quized? '#15F5BA' : 'white', color: 'black', position: 'relative', bottom: '300px', left: '50px', width: '180px' }}>
                         {/* A: Ask for help */}
                         {quized ? <><CheckIcon /> Correct</> : 'A: Ask for help'}
                         </Button>
-                        <Button color='primary' variant="contained" style={{ backgroundColor: 'white', color: 'black', position: 'relative', bottom: '280px', left: '50px', width: '180px' }}>
-                        B: Wait and rest
+                        <Button color='primary' variant="contained" onClick={() => { handleBIncorrect(true); handleCIncorrect(false); }}
+                            style={{ backgroundColor: bIncorrect && !quized && !cIncorrect ? '#FE76FF' : 'white', color: 'black', position: 'relative', bottom: '280px', left: '50px', width: '180px' }}>
+                        {bIncorrect && !quized && !cIncorrect ? <> Try thinking of a more active approach</> : 'B: Wait and rest'}
                         </Button>
-                        <Button color="primary" variant="contained" style={{ backgroundColor: 'white', color: 'black', position: 'relative', bottom: '260px', left: '50px', width: '180px' }}>
-                        C: Ignore and go
+                        <Button color="primary" variant="contained" onClick={() => { handleCIncorrect(true); handleBIncorrect(false); }}
+                            style={{ backgroundColor: cIncorrect && !quized && !bIncorrect ? '#FE76FF' : 'white', color: 'black', position: 'relative', bottom: '260px', left: '50px', width: '180px' }}>
+                        {cIncorrect && !quized && !bIncorrect ? <>Try thinking of a more active approach</> : 'C: Ignore and go'}
                         </Button>
                         <p
                         style={{
