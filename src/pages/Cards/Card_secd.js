@@ -150,7 +150,7 @@ const Card1 = () => {
             setCity(cityName);
           });
     };
-    
+
     useEffect(() => {
         console.log('Updated Latitude:', lat);
         console.log('Updated Longitude:', lon);
@@ -305,7 +305,7 @@ const Card1 = () => {
                 </SwiperSlide>
 
 
-                <SwiperSlide id="jump_card" onClick={() => handleSlideClick(1)}>
+                {/* <SwiperSlide id="jump_card" onClick={() => handleSlideClick(1)}>
                     {1 <= lastUnlockedSlideIndex ? (
                     <div style={{ position: 'relative' }}>
                         <img id="card_backg" src={card_g} alt="logo" />
@@ -358,11 +358,11 @@ const Card1 = () => {
                             <LockTwoToneIcon style={{position: 'absolute', fontSize: '80px', color: 'white',top: '35%',left:'70%', zIndex: 2 }} />
                         </div>
                     )}
-                </SwiperSlide>
+                </SwiperSlide> */}
 
 
-                <SwiperSlide id="lesson_card02" onClick={() => handleSlideClick(2)}>
-                    {2 <= lastUnlockedSlideIndex ? (
+                <SwiperSlide id="lesson_card02" onClick={() => handleSlideClick(1)}>
+                    {1 <= lastUnlockedSlideIndex ? (
                     <div style={{ position: 'relative' }}>
                         <img id="card_backg" src={card_g} alt="logo" />
                         <img id="lesson_1" src={lesson} alt="logo"  onClick={handleClick}
@@ -420,8 +420,8 @@ const Card1 = () => {
 
 
 
-                <SwiperSlide id="rotate_card" onClick={() => handleSlideClick(3)}>
-                    {3 <= lastUnlockedSlideIndex ? (
+                <SwiperSlide id="rotate_card" onClick={() => handleSlideClick(2)}>
+                    {2 <= lastUnlockedSlideIndex ? (
                     <div style={{ position: 'relative' }}>
                         <img id="card_backg" src={card_g} alt="logo" />
                         <img id="balance" src={balance} alt="logo"
@@ -493,8 +493,8 @@ const Card1 = () => {
                 </SwiperSlide>
 
 
-                <SwiperSlide id="quiz_card" onClick={() => handleSlideClick(4)}>
-                    {4 <= lastUnlockedSlideIndex ? (
+                <SwiperSlide id="quiz_card" onClick={() => handleSlideClick(3)}>
+                    {3 <= lastUnlockedSlideIndex ? (
                     <div style={{ position: 'relative' }}>
                         <img id="card_backg" src={card_g} alt="logo" />
                         <Button color="primary" variant="contained" onClick={handleQuized}
@@ -545,8 +545,8 @@ const Card1 = () => {
                     )}
                 </SwiperSlide>
 
-                <SwiperSlide id="resort_card" onClick={() => handleSlideClick(5)}>
-                    {5 <= lastUnlockedSlideIndex ? (
+                <SwiperSlide id="resort_card" onClick={() => handleSlideClick(4)}>
+                    {4 <= lastUnlockedSlideIndex ? (
                     <div style={{ position: 'relative' }}>
                         <img id="card_backg" src={card_g} alt="logo" />
                         <Button  color="primary" variant="contained" style={{ backgroundColor: 'white', color: 'black', position: 'relative', bottom: '305px', left: '40px', width: '200px', height: '30px' }}>
@@ -610,8 +610,8 @@ const Card1 = () => {
                     )}
                 </SwiperSlide>
 
-                <SwiperSlide id="more_resort_cards" onClick={() => handleSlideClick(6)}>
-                    {6 <= lastUnlockedSlideIndex ? (
+                <SwiperSlide id="more_resort_cards" onClick={() => handleSlideClick(5)}>
+                    {5 <= lastUnlockedSlideIndex ? (
                     <div style={{ position: 'relative' }}>
                         <img id="card_backg" src={card_g} alt="logo" />
                         <Button color="primary" variant="contained" style={{ fontSize: '10px', backgroundColor: 'white', color: 'black', position: 'relative', bottom: '280px', left: '50px', width: '180px', height: '30px' }}>
@@ -651,8 +651,8 @@ const Card1 = () => {
                     )}
                 </SwiperSlide>
 
-                <SwiperSlide id="lock_func" onClick={() => handleSlideClick(7)}>
-                    {7 <= lastUnlockedSlideIndex ? (
+                <SwiperSlide id="lock_func" onClick={() => handleSlideClick(6)}>
+                    {6 <= lastUnlockedSlideIndex ? (
                     <div style={{ position: 'relative'}}>
                         <img id="card_backg" src={card_g} alt="logo" />
                         <div
