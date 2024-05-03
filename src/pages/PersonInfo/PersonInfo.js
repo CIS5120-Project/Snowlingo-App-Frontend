@@ -16,6 +16,7 @@ function PersonInfo () {
   const [ageNum, setAgeNum] = useState('');
   const [height, setHeight] = useState('');
   const [heightUnit, setHeightUnit] = useState('ft');
+  const [weight, setWeight] = useState('');
   const [weightUnit, setWeightUnit] = useState('lbs');
   const [state, setState] = useState('');
   const [city, setCity] = useState('');
@@ -52,9 +53,46 @@ function PersonInfo () {
   }
 
   const handleHeightChange = (event) => {
-      const newHeight = event.target.value;
-      // Add validation or formatting logic here if necessary
+    let newHeight = event.target.value;
+    // Add validation or formatting logic here if necessary
+    if (heightUnit === 'cm') {
+      if (!isNaN(newHeight)) {
+        if (newHeight > 210) {
+          newHeight = 210;
+        }
+        if (newHeight < 0) {
+          newHeight = 0;
+        }
+        setHeight(newHeight);
+      } else {
+        setHeight('');
+      }
+    } else {
       setHeight(newHeight);
+    }
+  };
+
+  const handleWeightChange = (event) => {
+    let newWeight = event.target.value;
+    // Add validation or formatting logic here if necessary
+    let maxWeight = 0;
+    if (weightUnit === 'lbs') {
+      maxWeight = 330;
+    } else {
+      maxWeight = 150;
+    }
+
+    if (!isNaN(newWeight)) {
+      if (newWeight > maxWeight) {
+        newWeight = maxWeight;
+      }
+      if (newWeight < 0) {
+        newWeight = 0;
+      }
+      setWeight(newWeight);
+    } else {
+      setWeight('');
+    }
   };
 
   const handleStateChange = (event) => {
@@ -236,6 +274,8 @@ function PersonInfo () {
               variant="standard"
               type="number"
               label="Weight:"
+              value={weight}
+              onChange={handleWeightChange}
               InputLabelProps={{ style: { color: "#F0F3FF" }, shrink: false }}
               sx={{
                 backgroundColor: theme.palette.primary.dark,
