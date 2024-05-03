@@ -13,10 +13,10 @@ function PersonInfo () {
   const [deleteCount, setDeleteCount] = useState(0);
   const [lastMousePosition, setLastMousePosition] = useState({ x: 0, y: 0 });
   const [totalDistance, setTotalDistance] = useState(0);
-  const [ageNum, setAgeNum] = useState('');
-  const [height, setHeight] = useState('');
+  const [ageNum, setAgeNum] = useState();
+  const [height, setHeight] = useState("");
   const [heightUnit, setHeightUnit] = useState('ft');
-  const [weight, setWeight] = useState('');
+  const [weight, setWeight] = useState();
   const [weightUnit, setWeightUnit] = useState('lbs');
   const [state, setState] = useState('');
   const [city, setCity] = useState('');
@@ -32,67 +32,27 @@ function PersonInfo () {
       setHeight('');
 
       // Optionally set default values for each unit
-      if (newUnit === 'ft') {
-          setHeight("5'8''"); // Set a default example value for feet and inches
-      }
+      // if (newUnit === 'ft') {
+      //     setHeight("5'8''"); // Set a default example value for feet and inches
+      // }
   };
 
   const handleAgeChange = (event) => {
-    let age = parseInt(event.target.value, 10);
-    if (!isNaN(age)) {
-      if (age > 120) {
-        age = 120;
-      }
-      if (age < 0) {
-        age = 0;
-      }
-      setAgeNum(age);
-    } else {
-      setAgeNum('');
-    }
-  }
+    setAgeNum(event.target.value);
+    console.log(ageNum);
+  };
 
   const handleHeightChange = (event) => {
-    let newHeight = event.target.value;
-    // Add validation or formatting logic here if necessary
-    if (heightUnit === 'cm') {
-      if (!isNaN(newHeight)) {
-        if (newHeight > 210) {
-          newHeight = 210;
-        }
-        if (newHeight < 0) {
-          newHeight = 0;
-        }
-        setHeight(newHeight);
-      } else {
-        setHeight('');
-      }
-    } else {
-      setHeight(newHeight);
-    }
+    console.log(event.target)
+    console.log("1992182903")
+    console.log("val: " + event.target.value);
+    setHeight(event.target.value);
+    console.log(height);
   };
 
   const handleWeightChange = (event) => {
-    let newWeight = event.target.value;
-    // Add validation or formatting logic here if necessary
-    let maxWeight = 0;
-    if (weightUnit === 'lbs') {
-      maxWeight = 330;
-    } else {
-      maxWeight = 150;
-    }
-
-    if (!isNaN(newWeight)) {
-      if (newWeight > maxWeight) {
-        newWeight = maxWeight;
-      }
-      if (newWeight < 0) {
-        newWeight = 0;
-      }
-      setWeight(newWeight);
-    } else {
-      setWeight('');
-    }
+    setWeight(event.target.value);
+    console.log(weight);
   };
 
   const handleStateChange = (event) => {
@@ -158,7 +118,7 @@ function PersonInfo () {
     }
 
     setStartTime(Date.now());
-    setHeight("5'8''"); // Set a default example value for feet and inches
+    // setHeight("5'8''"); // Set a default example value for feet and inches
   }, []);
 
   useEffect(() => {
@@ -208,45 +168,75 @@ function PersonInfo () {
         <Grid container spacing={1} alignItems="flex-end">
           <Grid item sx={{ color: "#F0F3FF" }}>{">"}</Grid>
           <Grid item xs={10}>
-            <TextField
-              fullWidth
-              variant="standard"
-              type="number"
-              label="Age:"
-              value={ageNum}
-              inputProps={{
-                max: 120, min: 0
-              }}
-              InputLabelProps={{ style: { color: "#F0F3FF" }, shrink: false }}
-              sx={{
-                backgroundColor: theme.palette.primary.dark,
-                borderBottom: '1px solid #F0F3FF',
-                width: "100%",
-                input: { color: theme.palette.secondary.main, textAlign: "right" }
-              }}
-              onChange={handleAgeChange}
-            />
+            <FormControl fullWidth>
+              <InputLabel sx={{ color: '#F0F3FF' }}>Age</InputLabel>
+              <Select
+                value={(ageNum === undefined || ageNum === null || ageNum.length === 0) ? '' : ageNum}
+                label="Age"
+                onChange={handleAgeChange}
+                sx={{ borderBottom: '1px solid #F0F3FF', color: "#F0F3FF" }}
+              >
+                <MenuItem value={10}>10-20</MenuItem>
+                <MenuItem value={20}>20-30</MenuItem>
+                <MenuItem value={30}>30-40</MenuItem>
+                <MenuItem value={40}>40-50</MenuItem>
+                <MenuItem value={50}>50-60</MenuItem>
+                <MenuItem value={60}>60-70</MenuItem>
+                <MenuItem value={70}>70-80</MenuItem>
+                <MenuItem value={80}>80-90</MenuItem>
+                <MenuItem value={90}>90-100</MenuItem>
+              </Select>
+            </FormControl>
           </Grid>
         </Grid>
 
         <Grid container spacing={1} alignItems="flex-end">
             <Grid item sx={{ color: "#F0F3FF" }}>{">"}</Grid>
             <Grid item xs={6}>
-                <TextField
-                    fullWidth
-                    variant="standard"
-                    type={heightUnit === 'cm' ? 'number' : 'text'} // Dynamic type based on unit
-                    label="Height:"
-                    value={height}
-                    onChange={handleHeightChange}
-                    InputLabelProps={{ style: { color: "#F0F3FF" }, shrink: false }}
-                    sx={{
-                        backgroundColor: theme.palette.primary.dark,
-                        borderBottom: '1px solid #F0F3FF',
-                        width: "100%",
-                        input: { color: theme.palette.secondary.main, textAlign: "right" }
-                    }}
-                />
+              <FormControl fullWidth>
+                <InputLabel sx={{ color: '#F0F3FF' }}>Height</InputLabel>
+                {heightUnit === 'ft' ?
+                <Select
+                  value={height}
+                  label="Height"
+                  onChange={handleHeightChange}
+                  sx={{ borderBottom: '1px solid #F0F3FF', color: "#F0F3FF" }}
+                >
+                  <MenuItem value={50}>Less than 5'0''</MenuItem>
+                  <MenuItem value={52}>5'0''-5'2''</MenuItem>
+                  <MenuItem value={54}>5'2''-5'4''</MenuItem>
+                  <MenuItem value={56}>5'4''-5'6''</MenuItem>
+                  <MenuItem value={58}>5'6''-5'8''</MenuItem>
+                  <MenuItem value={510}>5'8''-5'10''</MenuItem>
+                  <MenuItem value={60}>5'10''-6'0''</MenuItem>
+                  <MenuItem value={62}>6'0''-6'2''</MenuItem>
+                  <MenuItem value={64}>6'2''-6'4''</MenuItem>
+                  <MenuItem value={66}>6'4''-6'6''</MenuItem>
+                  <MenuItem value={68}>6'6''-6'8''</MenuItem>
+                  <MenuItem value={610}>6'8''-6'11''</MenuItem>
+                </Select> :
+                <Select
+                  value={height}
+                  label="Height"
+                  onChange={handleHeightChange}
+                  sx={{ borderBottom: '1px solid #F0F3FF', color: "#F0F3FF" }}
+                >
+                  <MenuItem value={152}>Less than 152cm</MenuItem>
+                  <MenuItem value={157}>152-157cm</MenuItem>
+                  <MenuItem value={162}>157-162cm</MenuItem>
+                  <MenuItem value={167}>162-167cm</MenuItem>
+                  <MenuItem value={172}>167-172cm</MenuItem>
+                  <MenuItem value={177}>172-177cm</MenuItem>
+                  <MenuItem value={182}>177-182cm</MenuItem>
+                  <MenuItem value={187}>182-187cm</MenuItem>
+                  <MenuItem value={192}>187-192cm</MenuItem>
+                  <MenuItem value={197}>192-197cm</MenuItem>
+                  <MenuItem value={202}>197-202cm</MenuItem>
+                  <MenuItem value={207}>202-207cm</MenuItem>
+                  <MenuItem value={211}>207-211cm</MenuItem>
+                  </Select>
+                }
+              </FormControl>
             </Grid>
             <Grid item xs={4}>
                 <FormControl fullWidth variant="standard">
@@ -269,21 +259,52 @@ function PersonInfo () {
         <Grid container spacing={1} alignItems="flex-end">
           <Grid item sx={{ color: "#F0F3FF" }}>{">"}</Grid>
           <Grid item xs={6}>
-            <TextField
-              fullWidth
-              variant="standard"
-              type="number"
-              label="Weight:"
-              value={weight}
-              onChange={handleWeightChange}
-              InputLabelProps={{ style: { color: "#F0F3FF" }, shrink: false }}
-              sx={{
-                backgroundColor: theme.palette.primary.dark,
-                borderBottom: '1px solid #F0F3FF',
-                width: "100%",
-                input: { color: theme.palette.secondary.main, textAlign: "right" }
-              }}
-            />
+              <FormControl fullWidth>
+                <InputLabel sx={{ color: '#F0F3FF' }}>Weight</InputLabel>
+                <Select
+                  value={(weight === undefined || weight === null || weight.length === 0) ? '' : weight}
+                  label="Weight"
+                  onChange={handleWeightChange}
+                  sx={{ borderBottom: '1px solid #F0F3FF', color: "#F0F3FF" }}
+                >
+                  {weightUnit === 'kg' ?
+                  <Box>
+                    <MenuItem value={40}>Less than 45kg</MenuItem>
+                    <MenuItem value={45}>45-50kg</MenuItem>
+                    <MenuItem value={50}>50-55kg</MenuItem>
+                    <MenuItem value={55}>55-60kg</MenuItem>
+                    <MenuItem value={60}>60-65kg</MenuItem>
+                    <MenuItem value={65}>65-70kg</MenuItem>
+                    <MenuItem value={70}>70-75kg</MenuItem>
+                    <MenuItem value={75}>75-80kg</MenuItem>
+                    <MenuItem value={80}>80-85kg</MenuItem>
+                    <MenuItem value={85}>85-90kg</MenuItem>
+                    <MenuItem value={90}>90-95kg</MenuItem>
+                    <MenuItem value={95}>95-100kg</MenuItem>
+                    <MenuItem value={100}>100-105kg</MenuItem>
+                    <MenuItem value={105}>105-110kg</MenuItem>
+                    <MenuItem value={110}>110-115kg</MenuItem>
+                  </Box> :
+                  <Box>
+                    <MenuItem value={100}>Less than 100lb</MenuItem>
+                    <MenuItem value={100}>100-110lb</MenuItem>
+                    <MenuItem value={110}>110-120lb</MenuItem>
+                    <MenuItem value={120}>120-130lb</MenuItem>
+                    <MenuItem value={130}>130-140lb</MenuItem>
+                    <MenuItem value={140}>140-150lb</MenuItem>
+                    <MenuItem value={150}>150-160lb</MenuItem>
+                    <MenuItem value={160}>160-170lb</MenuItem>
+                    <MenuItem value={170}>170-180lb</MenuItem>
+                    <MenuItem value={180}>180-190lb</MenuItem>
+                    <MenuItem value={190}>190-200lb</MenuItem>
+                    <MenuItem value={200}>200-210lb</MenuItem>
+                    <MenuItem value={210}>210-220lb</MenuItem>
+                    <MenuItem value={220}>220-230lb</MenuItem>
+                    <MenuItem value={230}>230-240lb</MenuItem>
+                    <MenuItem value={240}>240-250lb</MenuItem>
+                  </Box>}
+                </Select>
+              </FormControl>
           </Grid>
           <Grid item xs={4}>
             <FormControl fullWidth variant="standard">
