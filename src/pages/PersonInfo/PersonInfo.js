@@ -261,49 +261,53 @@ function PersonInfo () {
           <Grid item xs={6}>
               <FormControl fullWidth>
                 <InputLabel sx={{ color: '#F0F3FF' }}>Weight</InputLabel>
+                {weightUnit === 'kg' ?
                 <Select
                   value={(weight === undefined || weight === null || weight.length === 0) ? '' : weight}
                   label="Weight"
                   onChange={handleWeightChange}
                   sx={{ borderBottom: '1px solid #F0F3FF', color: "#F0F3FF" }}
                 >
-                  {weightUnit === 'kg' ?
-                  <Box>
-                    <MenuItem value={40}>Less than 45kg</MenuItem>
-                    <MenuItem value={45}>45-50kg</MenuItem>
-                    <MenuItem value={50}>50-55kg</MenuItem>
-                    <MenuItem value={55}>55-60kg</MenuItem>
-                    <MenuItem value={60}>60-65kg</MenuItem>
-                    <MenuItem value={65}>65-70kg</MenuItem>
-                    <MenuItem value={70}>70-75kg</MenuItem>
-                    <MenuItem value={75}>75-80kg</MenuItem>
-                    <MenuItem value={80}>80-85kg</MenuItem>
-                    <MenuItem value={85}>85-90kg</MenuItem>
-                    <MenuItem value={90}>90-95kg</MenuItem>
-                    <MenuItem value={95}>95-100kg</MenuItem>
-                    <MenuItem value={100}>100-105kg</MenuItem>
-                    <MenuItem value={105}>105-110kg</MenuItem>
-                    <MenuItem value={110}>110-115kg</MenuItem>
-                  </Box> :
-                  <Box>
-                    <MenuItem value={100}>Less than 100lb</MenuItem>
-                    <MenuItem value={100}>100-110lb</MenuItem>
-                    <MenuItem value={110}>110-120lb</MenuItem>
-                    <MenuItem value={120}>120-130lb</MenuItem>
-                    <MenuItem value={130}>130-140lb</MenuItem>
-                    <MenuItem value={140}>140-150lb</MenuItem>
-                    <MenuItem value={150}>150-160lb</MenuItem>
-                    <MenuItem value={160}>160-170lb</MenuItem>
-                    <MenuItem value={170}>170-180lb</MenuItem>
-                    <MenuItem value={180}>180-190lb</MenuItem>
-                    <MenuItem value={190}>190-200lb</MenuItem>
-                    <MenuItem value={200}>200-210lb</MenuItem>
-                    <MenuItem value={210}>210-220lb</MenuItem>
-                    <MenuItem value={220}>220-230lb</MenuItem>
-                    <MenuItem value={230}>230-240lb</MenuItem>
-                    <MenuItem value={240}>240-250lb</MenuItem>
-                  </Box>}
+                  <MenuItem value={40}>Less than 45kg</MenuItem>
+                  <MenuItem value={45}>45-50kg</MenuItem>
+                  <MenuItem value={50}>50-55kg</MenuItem>
+                  <MenuItem value={55}>55-60kg</MenuItem>
+                  <MenuItem value={60}>60-65kg</MenuItem>
+                  <MenuItem value={65}>65-70kg</MenuItem>
+                  <MenuItem value={70}>70-75kg</MenuItem>
+                  <MenuItem value={75}>75-80kg</MenuItem>
+                  <MenuItem value={80}>80-85kg</MenuItem>
+                  <MenuItem value={85}>85-90kg</MenuItem>
+                  <MenuItem value={90}>90-95kg</MenuItem>
+                  <MenuItem value={95}>95-100kg</MenuItem>
+                  <MenuItem value={100}>100-105kg</MenuItem>
+                  <MenuItem value={105}>105-110kg</MenuItem>
+                  <MenuItem value={110}>110-115kg</MenuItem>
+                </Select> :
+                <Select
+                  value={(weight === undefined || weight === null || weight.length === 0) ? '' : weight}
+                  label="Weight"
+                  onChange={handleWeightChange}
+                  sx={{ borderBottom: '1px solid #F0F3FF', color: "#F0F3FF" }}
+                >
+                  <MenuItem value={100}>Less than 100lb</MenuItem>
+                  <MenuItem value={100}>100-110lb</MenuItem>
+                  <MenuItem value={110}>110-120lb</MenuItem>
+                  <MenuItem value={120}>120-130lb</MenuItem>
+                  <MenuItem value={130}>130-140lb</MenuItem>
+                  <MenuItem value={140}>140-150lb</MenuItem>
+                  <MenuItem value={150}>150-160lb</MenuItem>
+                  <MenuItem value={160}>160-170lb</MenuItem>
+                  <MenuItem value={170}>170-180lb</MenuItem>
+                  <MenuItem value={180}>180-190lb</MenuItem>
+                  <MenuItem value={190}>190-200lb</MenuItem>
+                  <MenuItem value={200}>200-210lb</MenuItem>
+                  <MenuItem value={210}>210-220lb</MenuItem>
+                  <MenuItem value={220}>220-230lb</MenuItem>
+                  <MenuItem value={230}>230-240lb</MenuItem>
+                  <MenuItem value={240}>240-250lb</MenuItem>
                 </Select>
+              }
               </FormControl>
           </Grid>
           <Grid item xs={4}>
