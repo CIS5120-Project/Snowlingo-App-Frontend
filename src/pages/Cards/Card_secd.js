@@ -20,6 +20,7 @@ import LockTwoToneIcon from '@mui/icons-material/LockTwoTone';
 // import { Swiper, SwiperSlide } from 'swiper/react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { EffectCoverflow, Pagination, Navigation, Scrollbar } from 'swiper/modules';
+import InteractiveMap from "./interactiveMap";
 // import 'swiper/swiper.min.css';
 import 'swiper/css';
 // import 'swiper/components/effect-coverflow/effect-coverflow.min.css';
@@ -46,6 +47,9 @@ const Card1 = () => {
     const API_Key = "uK5KQiG3kRSRj6CGY8wr1MLniUGG4IuL";
     const [state, setState] = useState('');
     const [city, setCity] = useState('');
+    const [lat, setLat] = useState(39.952139);
+    const [lon, setLon] = useState(-75.191049);
+
     // const [lastUnlockedSlideIndex, setLastUnlockedSlideIndex] = useState(0);
     const [lastUnlockedSlideIndex, setLastUnlockedSlideIndex] = useState(() => {
         const storedIndex = localStorage.getItem('lastUnlockedSlideIndex');
@@ -75,6 +79,11 @@ const Card1 = () => {
         localStorage.setItem('lastUnlockedSlideIndex', lastUnlockedSlideIndex);
     }, [lastUnlockedSlideIndex]);
 
+    const resetMemory = () => {
+        localStorage.removeItem('lastUnlockedSlideIndex');  // Clear the specific item from localStorage
+        setLastUnlockedSlideIndex(0);  // Reset the state to its initial value
+    };
+
     //useless click
     const handleClick = () => {
         console.log('The image was clicked!');
@@ -101,8 +110,14 @@ const Card1 = () => {
 
     //unit
     function handleUnitClick(event) {
-    const buttonId = event.currentTarget.getAttribute('data-id');
-    navigate(`/unit?id=${buttonId}`);
+        const buttonId = event.currentTarget.getAttribute('data-id');
+        navigate(`/unit?id=${buttonId}`);
+    };
+
+    const handleResortClick = (event) => {
+        event.stopPropagation();
+        console.log("Resort button clicked");
+        navigate(`/resorts`);
     };
 
     const handleJumpClick = () => {
@@ -120,6 +135,11 @@ const Card1 = () => {
     const handleSuccess = async (position) => {
         console.log('Latitude:', position.coords.latitude);
         console.log('Longitude:', position.coords.longitude);
+        setLat(position.coords.latitude);
+        setLon(position.coords.longitude);
+        // console.log('cur_Latitude:', lat);
+        // console.log('cur_Longitude:', lon);
+
         fetch(`https://api.tomtom.com/search/2/nearbySearch/.json?key=${API_Key}&lat=${position.coords.latitude}&lon=${position.coords.longitude}`)
           .then((res) => res.json())
           .then((data) => {
@@ -130,6 +150,11 @@ const Card1 = () => {
             setCity(cityName);
           });
     };
+    
+    useEffect(() => {
+        console.log('Updated Latitude:', lat);
+        console.log('Updated Longitude:', lon);
+    }, [lat, lon]);
 
     // Function to handle location access error
     const handleError = (error) => {
@@ -187,7 +212,7 @@ const Card1 = () => {
                 <img id="login-snow" src={snow} alt="logo" style={{ marginTop: "0.5rem", marginBottom: "1.5rem", marginLeft:"5.5rem" }}></img>
             </Box>
 
-            <img id="ski-icon" src={ski_icon} alt="logo" style={{ marginTop: "0.2rem", marginBottom: "0.5rem", marginLeft:"10.5rem" }}></img>
+            <img id="ski-icon" src={ski_icon} alt="logo" onClick={resetMemory} style={{ marginTop: "0.2rem", marginBottom: "0.5rem", marginLeft:"10.5rem" }}></img>
 
 
             <Swiper
@@ -324,6 +349,9 @@ const Card1 = () => {
                           }}
                         >Focus</p>
                     </div>
+                    // <div style={{ position: 'relative' }}>
+                    //     <InteractiveMap lat={lat} lon={lon} />
+                    // </div>
                      ) : (
                         <div style={{ opacity: 0.8, justifyContent: 'center', alignItems: 'center', height: '100%' }}>
                             <img id="card_backg" src={card_g} alt="logo" />
@@ -521,7 +549,7 @@ const Card1 = () => {
                     {5 <= lastUnlockedSlideIndex ? (
                     <div style={{ position: 'relative' }}>
                         <img id="card_backg" src={card_g} alt="logo" />
-                        <Button color="primary" variant="contained" style={{ backgroundColor: 'white', color: 'black', position: 'relative', bottom: '305px', left: '40px', width: '200px', height: '30px' }}>
+                        <Button  color="primary" variant="contained" style={{ backgroundColor: 'white', color: 'black', position: 'relative', bottom: '305px', left: '40px', width: '200px', height: '30px' }}>
                         <p
                         style={{
                             fontSize: '8px',
@@ -532,11 +560,12 @@ const Card1 = () => {
                             fontWeight:'bold'
                         }}
                         >BlueMountain Resort (5.1mi)</p>
-                            <Button onClick={()=>goToSlide(2)} style={{ backgroundColor: '#FE76FF', color: 'black', left: '7px', width:'50px', height:'20px', fontSize:'12px' }}>
+                            {/* <Button onClick={()=>goToSlide(2)} style={{ backgroundColor: '#FE76FF', color: 'black', left: '7px', width:'50px', height:'20px', fontSize:'12px' }}> */}
+                            <Button onClick={handleResortClick} style={{ backgroundColor: '#FE76FF', color: 'black', bottom:'2px', left: '7px', width:'50px', height:'20px', fontSize:'12px' }}>
                             More
                             </Button>
                         </Button>
-                        <img id="map" src={map} alt="logo"
+                        {/* <img id="map" src={map} alt="logo"
                             style={{
                                 position: 'absolute',
                                 top: '38%',
@@ -546,7 +575,10 @@ const Card1 = () => {
                                 height: 'auto',
                                 zIndex: 2,
                             }}
-                        />
+                        /> */}
+                         {/* <div style={{ position: 'relative', width: '100%', height: '200px', zIndex: 2, overflow: 'hidden' }}> */}
+                             {/* <InteractiveMap lat={lat} lon={lon} /> */}
+                         {/* </div> */}
                         <Button color="primary" variant="contained" style={{ backgroundColor: 'white', color: 'black', position: 'relative', bottom: '175px', left: '40px', width: '200px', height: '50px',  fontSize: '12px', fontWeight: 'bold' }}>
                         Go make 10 turns in mid level slope!
                         </Button>
@@ -566,6 +598,9 @@ const Card1 = () => {
                         <Button onClick={()=>showLocation()} style={{ backgroundColor: '#FE76FF', color: 'black', fontWeight: 'bold', width:'125px', height:'30px', fontSize:'10px', bottom:'155px', left:"75px" }}>
                             {buttonText}
                         </Button>
+                        <div style={{ position: 'relative', bottom:'380px', left:'35px'}}>
+                            <InteractiveMap lat={lat} lon={lon} />
+                        </div>
                     </div>
                     ) : (
                         <div style={{ opacity: 0.8, justifyContent: 'center', alignItems: 'center', height: '100%' }}>
