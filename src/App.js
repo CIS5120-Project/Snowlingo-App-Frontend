@@ -18,6 +18,7 @@ import Unit from "./pages/Unit/Unit";
 import Maintenance from './pages/Maintenance/Maintenance';
 import Card from './pages/Cards/Card_init';
 import Card02 from './pages/Cards/Card_secd';
+import Resort from './pages/moreResort/moreResort';
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
             <Route path="/" element={<Landing />} />
             <Route path="/card" element={<Card />} />
             <Route path="/cards02" element={<Card02 />} />
+            <Route path="/resorts" element={<Resort />} />
           </Routes>
         </div>
       </Router>

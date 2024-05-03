@@ -110,8 +110,14 @@ const Card1 = () => {
 
     //unit
     function handleUnitClick(event) {
-    const buttonId = event.currentTarget.getAttribute('data-id');
-    navigate(`/unit?id=${buttonId}`);
+        const buttonId = event.currentTarget.getAttribute('data-id');
+        navigate(`/unit?id=${buttonId}`);
+    };
+
+    const handleResortClick = (event) => {
+        event.stopPropagation();
+        console.log("Resort button clicked");
+        navigate(`/resorts`);
     };
 
     const handleJumpClick = () => {
@@ -543,7 +549,7 @@ const Card1 = () => {
                     {5 <= lastUnlockedSlideIndex ? (
                     <div style={{ position: 'relative' }}>
                         <img id="card_backg" src={card_g} alt="logo" />
-                        <Button color="primary" variant="contained" style={{ backgroundColor: 'white', color: 'black', position: 'relative', bottom: '305px', left: '40px', width: '200px', height: '30px' }}>
+                        <Button  color="primary" variant="contained" style={{ backgroundColor: 'white', color: 'black', position: 'relative', bottom: '305px', left: '40px', width: '200px', height: '30px' }}>
                         <p
                         style={{
                             fontSize: '8px',
@@ -554,7 +560,8 @@ const Card1 = () => {
                             fontWeight:'bold'
                         }}
                         >BlueMountain Resort (5.1mi)</p>
-                            <Button onClick={()=>goToSlide(2)} style={{ backgroundColor: '#FE76FF', color: 'black', left: '7px', width:'50px', height:'20px', fontSize:'12px' }}>
+                            {/* <Button onClick={()=>goToSlide(2)} style={{ backgroundColor: '#FE76FF', color: 'black', left: '7px', width:'50px', height:'20px', fontSize:'12px' }}> */}
+                            <Button onClick={handleResortClick} style={{ backgroundColor: '#FE76FF', color: 'black', bottom:'2px', left: '7px', width:'50px', height:'20px', fontSize:'12px' }}>
                             More
                             </Button>
                         </Button>
