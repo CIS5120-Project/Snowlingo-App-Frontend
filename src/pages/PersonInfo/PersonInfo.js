@@ -13,8 +13,10 @@ function PersonInfo () {
   const [deleteCount, setDeleteCount] = useState(0);
   const [lastMousePosition, setLastMousePosition] = useState({ x: 0, y: 0 });
   const [totalDistance, setTotalDistance] = useState(0);
+  const [ageNum, setAgeNum] = useState('');
   const [height, setHeight] = useState('');
   const [heightUnit, setHeightUnit] = useState('ft');
+  const [weight, setWeight] = useState('');
   const [weightUnit, setWeightUnit] = useState('lbs');
   const [state, setState] = useState('');
   const [city, setCity] = useState('');
@@ -35,10 +37,62 @@ function PersonInfo () {
       }
   };
 
+  const handleAgeChange = (event) => {
+    let age = parseInt(event.target.value, 10);
+    if (!isNaN(age)) {
+      if (age > 120) {
+        age = 120;
+      }
+      if (age < 0) {
+        age = 0;
+      }
+      setAgeNum(age);
+    } else {
+      setAgeNum('');
+    }
+  }
+
   const handleHeightChange = (event) => {
-      const newHeight = event.target.value;
-      // Add validation or formatting logic here if necessary
+    let newHeight = event.target.value;
+    // Add validation or formatting logic here if necessary
+    if (heightUnit === 'cm') {
+      if (!isNaN(newHeight)) {
+        if (newHeight > 210) {
+          newHeight = 210;
+        }
+        if (newHeight < 0) {
+          newHeight = 0;
+        }
+        setHeight(newHeight);
+      } else {
+        setHeight('');
+      }
+    } else {
       setHeight(newHeight);
+    }
+  };
+
+  const handleWeightChange = (event) => {
+    let newWeight = event.target.value;
+    // Add validation or formatting logic here if necessary
+    let maxWeight = 0;
+    if (weightUnit === 'lbs') {
+      maxWeight = 330;
+    } else {
+      maxWeight = 150;
+    }
+
+    if (!isNaN(newWeight)) {
+      if (newWeight > maxWeight) {
+        newWeight = maxWeight;
+      }
+      if (newWeight < 0) {
+        newWeight = 0;
+      }
+      setWeight(newWeight);
+    } else {
+      setWeight('');
+    }
   };
 
   const handleStateChange = (event) => {
@@ -159,6 +213,10 @@ function PersonInfo () {
               variant="standard"
               type="number"
               label="Age:"
+              value={ageNum}
+              inputProps={{
+                max: 120, min: 0
+              }}
               InputLabelProps={{ style: { color: "#F0F3FF" }, shrink: false }}
               sx={{
                 backgroundColor: theme.palette.primary.dark,
@@ -166,6 +224,7 @@ function PersonInfo () {
                 width: "100%",
                 input: { color: theme.palette.secondary.main, textAlign: "right" }
               }}
+              onChange={handleAgeChange}
             />
           </Grid>
         </Grid>
@@ -215,6 +274,8 @@ function PersonInfo () {
               variant="standard"
               type="number"
               label="Weight:"
+              value={weight}
+              onChange={handleWeightChange}
               InputLabelProps={{ style: { color: "#F0F3FF" }, shrink: false }}
               sx={{
                 backgroundColor: theme.palette.primary.dark,

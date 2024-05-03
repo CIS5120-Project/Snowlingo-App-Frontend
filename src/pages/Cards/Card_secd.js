@@ -37,6 +37,8 @@ const Card1 = () => {
     const navigate = useNavigate();
     const swiperRef = useRef(null);
     const [quized, setQuized] = useState(false);
+    const [bIncorrect, setBIncorrect] = useState(false);
+    const [cIncorrect, setCIncorrect] = useState(false);
     const imageList = [jump_1, jump_2, jump_3];
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [showMessage, setShowMessage] = useState(false);
@@ -91,13 +93,21 @@ const Card1 = () => {
         setQuized(true);
     };
 
+    const handleBIncorrect = (flag) => {
+        setBIncorrect(flag);
+    }
+
+    const handleCIncorrect = (flag) => {
+        setCIncorrect(flag);
+    }
+
     // jump to slide
     const goToSlide = (index) => {
         if (swiperRef.current) {
           swiperRef.current.swiper.slideTo(index);
         }
       };
-    
+
     //unit
     function handleUnitClick(event) {
     const buttonId = event.currentTarget.getAttribute('data-id');
@@ -157,7 +167,7 @@ const Card1 = () => {
         }
         // setStartTime(Date.now());
         // setHeight("5'8''"); // Set a default example value for feet and inches
-        }, 
+        },
         []);
 
     const showLocation = () => {
@@ -169,7 +179,7 @@ const Card1 = () => {
           }
     };
 
-    
+
 
 
 
@@ -239,10 +249,10 @@ const Card1 = () => {
                         <img id="lesson_1" src={lesson} alt="logo"  onClick={handleClick}
                             style={{
                                 position: 'absolute',
-                                top: '40%', 
-                                left: '100%', 
-                                transform: 'translate(-50%, -50%)', 
-                                width: '90%', 
+                                top: '40%',
+                                left: '100%',
+                                transform: 'translate(-50%, -50%)',
+                                width: '90%',
                                 height: 'auto',
                                 zIndex: 2,
                                 cursor: 'pointer',
@@ -352,10 +362,10 @@ const Card1 = () => {
                         <img id="lesson_1" src={lesson} alt="logo"  onClick={handleClick}
                             style={{
                                 position: 'absolute',
-                                top: '40%', 
-                                left: '100%', 
-                                transform: 'translate(-50%, -50%)', 
-                                width: '90%', 
+                                top: '40%',
+                                left: '100%',
+                                transform: 'translate(-50%, -50%)',
+                                width: '90%',
                                 height: 'auto',
                                 zIndex: 2,
                                 cursor: 'pointer',
@@ -482,15 +492,17 @@ const Card1 = () => {
                     <div style={{ position: 'relative' }}>
                         <img id="card_backg" src={card_g} alt="logo" />
                         <Button color="primary" variant="contained" onClick={handleQuized}
-                            style={{ backgroundColor: quized?'#FE76FF':'white', color: 'black', position: 'relative', bottom: '300px', left: '50px', width: '180px' }}>
+                            style={{ backgroundColor: quized? '#15F5BA' : 'white', color: 'black', position: 'relative', bottom: '300px', left: '50px', width: '180px' }}>
                         {/* A: Ask for help */}
                         {quized ? <><CheckIcon /> Correct</> : 'A: Ask for help'}
                         </Button>
-                        <Button color='primary' variant="contained" style={{ backgroundColor: 'white', color: 'black', position: 'relative', bottom: '280px', left: '50px', width: '180px' }}>
-                        B: Wait and rest
+                        <Button color='primary' variant="contained" onClick={() => { handleBIncorrect(true); handleCIncorrect(false); }}
+                            style={{ backgroundColor: bIncorrect && !quized && !cIncorrect ? '#FE76FF' : 'white', color: 'black', position: 'relative', bottom: '280px', left: '50px', width: '180px' }}>
+                        {bIncorrect && !quized && !cIncorrect ? <> Try thinking of a more active approach</> : 'B: Wait and rest'}
                         </Button>
-                        <Button color="primary" variant="contained" style={{ backgroundColor: 'white', color: 'black', position: 'relative', bottom: '260px', left: '50px', width: '180px' }}>
-                        C: Ignore and go
+                        <Button color="primary" variant="contained" onClick={() => { handleCIncorrect(true); handleBIncorrect(false); }}
+                            style={{ backgroundColor: cIncorrect && !quized && !bIncorrect ? '#FE76FF' : 'white', color: 'black', position: 'relative', bottom: '260px', left: '50px', width: '180px' }}>
+                        {cIncorrect && !quized && !bIncorrect ? <>Try thinking of a more active approach</> : 'C: Ignore and go'}
                         </Button>
                         <p
                         style={{
@@ -636,7 +648,7 @@ const Card1 = () => {
                     {7 <= lastUnlockedSlideIndex ? (
                     <div style={{ position: 'relative'}}>
                         <img id="card_backg" src={card_g} alt="logo" />
-                        <div 
+                        <div
                         style={{
                             position: 'absolute',
                             top: 10,
@@ -658,7 +670,7 @@ const Card1 = () => {
                             // backgroundColor: 'rgba(0, 0, 0, 0.5)',
                         }}
                         >
-                            <LockTwoToneIcon 
+                            <LockTwoToneIcon
                                 style={{ width: '80px', height: '80px', fill: 'white' }}
                             />
                         </div>
