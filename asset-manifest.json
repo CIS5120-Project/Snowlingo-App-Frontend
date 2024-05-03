@@ -1,24 +1,25 @@
 {
   "files": {
-    "main.css": "/Snowlingo-App-Frontend/static/css/main.b9917c9d.css",
-    "main.js": "/Snowlingo-App-Frontend/static/js/main.6571a6a3.js",
+    "main.css": "/Snowlingo-App-Frontend/static/css/main.70b32530.css",
+    "main.js": "/Snowlingo-App-Frontend/static/js/main.dbbec82d.js",
     "static/js/453.2ecd3b54.chunk.js": "/Snowlingo-App-Frontend/static/js/453.2ecd3b54.chunk.js",
+    "static/media/jump_2.svg": "/Snowlingo-App-Frontend/static/media/jump_2.d372bf7aaf3bec89f20a7d0e266c115d.svg",
     "static/media/jump_1.svg": "/Snowlingo-App-Frontend/static/media/jump_1.d8cc7f8b35392129d2ad4a2cc8c28710.svg",
     "static/media/card_g.svg": "/Snowlingo-App-Frontend/static/media/card_g.f922cb8d2d04ced50478f9e3d6d1c408.svg",
     "static/media/map.svg": "/Snowlingo-App-Frontend/static/media/map.58b3ad956c058f85e84a2a90413d4c50.svg",
-    "static/media/ski_icon.svg": "/Snowlingo-App-Frontend/static/media/ski_icon.5c2ad1c0ef0f0b0c3e26658d0debb2bf.svg",
+    "static/media/jump_3.svg": "/Snowlingo-App-Frontend/static/media/jump_3.082cca6676292253e677448bb93449f1.svg",
     "static/media/board_icon.svg": "/Snowlingo-App-Frontend/static/media/board_icon.5962a83a288d333fcfcb969067e91fb2.svg",
     "static/media/balance.svg": "/Snowlingo-App-Frontend/static/media/balance.d82caba3a5f72fc15da5eeaaf292a278.svg",
     "static/media/snowlingo.svg": "/Snowlingo-App-Frontend/static/media/snowlingo.2f1602dc87502cbe4a07b4aabfaaa46b.svg",
     "static/media/landingBg.svg": "/Snowlingo-App-Frontend/static/media/landingBg.cb796c4e64c6e2ff712a.svg",
     "static/media/lesson.svg": "/Snowlingo-App-Frontend/static/media/lesson.1916fc2657bf79016913baa5e31e793a.svg",
     "index.html": "/Snowlingo-App-Frontend/index.html",
-    "main.b9917c9d.css.map": "/Snowlingo-App-Frontend/static/css/main.b9917c9d.css.map",
-    "main.6571a6a3.js.map": "/Snowlingo-App-Frontend/static/js/main.6571a6a3.js.map",
+    "main.70b32530.css.map": "/Snowlingo-App-Frontend/static/css/main.70b32530.css.map",
+    "main.dbbec82d.js.map": "/Snowlingo-App-Frontend/static/js/main.dbbec82d.js.map",
     "453.2ecd3b54.chunk.js.map": "/Snowlingo-App-Frontend/static/js/453.2ecd3b54.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.b9917c9d.css",
-    "static/js/main.6571a6a3.js"
+    "static/css/main.70b32530.css",
+    "static/js/main.dbbec82d.js"
   ]
 }
